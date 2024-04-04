@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='UTF-8'>
+  <title>비트캠프 데브옵스 5기</title>
+</head>
+<body>
+
+<div data-th-replace="header :: header">header</div>
+
+<h1>회원</h1>
+<form action='update' data-th-action="@{update}" data-th-object="${member}"
+      enctype='multipart/form-data'
+      method='post'>
+  <div>
+    사진:
+    <a data-th-href="@{'https://kr.object.ncloudstorage.com/bitcamp-devops5-147/member/' + *{photo}}"
+       data-th-if="*{photo} != null">
+      <img data-th-if="*{photo} != null"
+           data-th-src="@{'https://d7m3pp1h2679.edge.naverncp.com/zH4V8numw0/member/' + *{photo}(type=f,w=80,h=80,ttype=jpg)}"></a><br>
+    <a data-th-href='@{/img/default-photo.jpeg}' data-th-if="*{photo} == null">
+      <img data-th-if="*{photo} == null"
+           data-th-src='@{/img/default-photo.jpeg}' height='80px'></a><br>
+    <input name='file' type='file'>
+  </div>
+  <div>
+    번호: <input data-th-value='*{no}' name='no' readonly type='text'>
+  </div>
+  <div>
+    이메일: <input data-th-value='*{email}' name='email' type='text'>
+  </div>
+  <div>
+    이름: <input data-th-value='*{name}' name='name' type='text'>
+  </div>
+  <div>
+    암호: <input name='password' type='password'>
+  </div>
+  <div>
+    가입일: <input data-th-value="*{#dates.format(createdDate,'yyyy-MM-dd')}" readonly
+                type='text' value="createdDate">
+  </div>
+  <div>
+    <button>변경</button>
+    <a data-th-href='@{delete(no=*{no})}'>[삭제]</a>
+  </div>
+</form>
+
+<div data-th-replace="footer :: footer">hooter</div>
+
+</body>
+</html>

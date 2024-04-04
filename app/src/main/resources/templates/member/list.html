@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='UTF-8'>
+  <title>비트캠프 데브옵스 5기</title>
+</head>
+<body>
+
+<div data-th-replace="header :: header">header</div>
+
+<h1>회원</h1>
+<a data-th-href="@{form}" href="form.html">새 회원</a>
+<table border='1'>
+  <thead>
+  <tr>
+    <th>번호</th>
+    <th>이름</th>
+    <th>이메일</th>
+    <th>가입일</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr data-th-each="member : ${list}" data-th-object="${member}">
+    <td data-th-text="*{no}">no</td>
+    <td>
+      <img data-th-if="*{photo} != null"
+           data-th-src="@{'https://d7m3pp1h2679.edge.naverncp.com/zH4V8numw0/member/' + *{photo}(type=f,w=20,h=20,quality=90,align=4,ttype=jpg)}"
+      >
+      <img data-th-if="*{photo} == null" data-th-src='@{/img/default-photo.jpeg}' height='20px'>
+      <a data-th-href='@{/member/view(no=*{no})}' data-th-text="*{name}">name</a>
+    </td>
+    <td data-th-text="*{email}">email</td>
+    <td data-th-text="*{#dates.format(createdDate,'yyyy-MM-dd')}">createdDate
+    </td>
+  </tr>
+  </tbody>
+</table>
+<p>
+  [
+  <a data-th-if="${pageNo <= 1}">이전</a>
+  <a data-th-href="@{list(pageNo=${pageNo-1},pageSize=${pageSize})}"
+     data-th-if="${pageNo > 1}"
+     href="list">이전</a>
+  ]
+
+  [
+  <a data-th-if="${pageNo >= page}">다음</a>
+  <a data-th-href="@{list(pageNo=${pageNo+1},pageSize=${pageSize})}"
+     data-th-if="${pageNo < page}"
+     href="list">다음</a>
+  ]
+</p>
+<div data-th-replace="footer :: footer">hooter</div>
+
+</body>
+</html>
