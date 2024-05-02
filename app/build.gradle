@@ -34,6 +34,11 @@ dependencies {
 
     // AWS S3 API
     implementation 'com.amazonaws:aws-java-sdk-s3:1.12.688'
+
+    // Spring Security
+    implementation "org.springframework.boot:spring-boot-starter-security"
+    // Spring Security Thymeleaf(Spring Security 5 integration)
+    implementation "org.thymeleaf.extras:thymeleaf-extras-springsecurity5"
 }
 
 tasks.named('bootBuildImage') {
